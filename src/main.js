@@ -14,5 +14,5 @@ function goToHtml() {
     const result = document.getElementById('courses')
     const result2 = createCourses()
     result.innerHTML = result2.map(p=> `<p>${JSON.stringify(p)}</p>`).join('')
-}
+}  
 goToHtml()
