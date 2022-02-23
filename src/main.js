@@ -13,6 +13,6 @@ console.log(courseData.maxCost)
 function goToHtml() {
     const result = document.getElementById('courses')
     const result2 = createCourses()
-    result.innerHTML = result2.map(p=> `<p>${JSON.stringify(p)}</p>`).join('')
+    result.innerHTML = result2.map(p=> `<li>${JSON.stringify(p)}</li>`).join('')
 }  
 goToHtml()

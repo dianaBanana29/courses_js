@@ -36,12 +36,12 @@ function getRandomNumber(min, max){
     //TODO return random number in range min-max
 }
 function getRandomElement(array){
-    return array[Math.floor(Math.random() * array.length)]
+    return array[Math.floor(Math.random() * (array.length-1))]
 //TODO return a random element of array
 }
 function getRandomDate(minYear, maxYear){
-    const start = new Date(minYear)
-    const end = new Date(maxYear)
+    const start = new Date(minYear+'')
+    const end = new Date(maxYear+'')
     const res = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()))
         return res.toDateString()
     }
@@ -75,7 +75,7 @@ function getRandomCourse(courseData){
     */
     const id = (0,_random__WEBPACK_IMPORTED_MODULE_1__.getRandomNumber)(courseData['minId'], courseData['maxId'])
     const name = (0,_random__WEBPACK_IMPORTED_MODULE_1__.getRandomElement)(courseData['courses'])
-    const lectors = (0,_random__WEBPACK_IMPORTED_MODULE_1__.getRandomElement)(courseData['lectors'])
+    const lectors = (0,_random__WEBPACK_IMPORTED_MODULE_1__.getRandomElement)(courseData['lecturers'])
     const hours = (0,_random__WEBPACK_IMPORTED_MODULE_1__.getRandomNumber)(courseData['minHours'], courseData['maxHours'])
     const howMuch = (0,_random__WEBPACK_IMPORTED_MODULE_1__.getRandomNumber)(courseData['minCost'], courseData['maxCost'])
     const dateStart = (0,_random__WEBPACK_IMPORTED_MODULE_1__.getRandomDate)(courseData['minYear'], courseData['maxYear'])
@@ -176,8 +176,8 @@ console.log(_config_courseData_json__WEBPACK_IMPORTED_MODULE_0__.maxCost)
 function goToHtml() {
     const result = document.getElementById('courses')
     const result2 = createCourses()
-    result.innerHTML = result2.map(p=> `<p>${JSON.stringify(p)}</p>`).join('')
-}
+    result.innerHTML = result2.map(p=> `<li>${JSON.stringify(p)}</li>`).join('')
+}  
 goToHtml()
 })();
 

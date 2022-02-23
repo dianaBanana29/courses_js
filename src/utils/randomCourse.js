@@ -9,7 +9,7 @@ export function getRandomCourse(courseData){
     */
     const id = getRandomNumber(courseData['minId'], courseData['maxId'])
     const name = getRandomElement(courseData['courses'])
-    const lectors = getRandomElement(courseData['lectors'])
+    const lectors = getRandomElement(courseData['lecturers'])
     const hours = getRandomNumber(courseData['minHours'], courseData['maxHours'])
     const howMuch = getRandomNumber(courseData['minCost'], courseData['maxCost'])
     const dateStart = getRandomDate(courseData['minYear'], courseData['maxYear'])

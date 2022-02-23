@@ -3,12 +3,12 @@ export function getRandomNumber(min, max){
     //TODO return random number in range min-max
 }
 export function getRandomElement(array){
-    return array[Math.floor(Math.random() * array.length)]
+    return array[Math.floor(Math.random() * (array.length-1))]
 //TODO return a random element of array
 }
 export function getRandomDate(minYear, maxYear){
-    const start = new Date(minYear)
-    const end = new Date(maxYear)
+    const start = new Date(minYear+'')
+    const end = new Date(maxYear+'')
     const res = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()))
         return res.toDateString()
     }
