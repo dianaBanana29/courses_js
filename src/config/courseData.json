@@ -1,6 +1,6 @@
 {
     "courses":["Java", "JavaTechnologies", "QA", "React","JavaScript","HTML/CSS"],
-    "lecturers": ["Abraham","Moshe", "Sara", "Yosef","Itshak", "Vasya"],
+    "lectors": ["Abraham","Moshe", "Sara", "Yosef","Itshak", "Vasya"],
     "minCost" : 5000,
     "maxCost": 30000,
     "minHours": 80,

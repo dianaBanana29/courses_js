@@ -1,17 +1,18 @@
-export function getRandomNumber(min, max){
-    return Math.floor(Math.random() * (max - min + 1) + min);
-    //TODO return random number in range min-max
-}
-export function getRandomElement(array){
-    return array[Math.floor(Math.random() * (array.length-1))]
-//TODO return a random element of array
-}
-export function getRandomDate(minYear, maxYear){
-    const start = new Date(minYear+'')
-    const end = new Date(maxYear+'')
-    const res = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()))
-        return res.toDateString()
+export function getRandomNumber(min, max) {
+    if (min > max) {
+        [min, max] = [max, min];
     }
-//TODO return random date object(see constructor of the standart class Date)
-//const date = new Date(year, month, day)
+    return min + Math.round(Math.random() * (max -min));
 
+}
+export function getRandomElement(array) {
+    const index = getRandomNumber(0, array.length - 1);
+    return array[index];
+}
+export function getRandomDate(minYear, maxYear) {
+    const year = getRandomNumber(minYear, maxYear);
+    const month = getRandomNumber(0, 11);
+    const day = getRandomNumber(1, 31);
+    const date = new Date(year, month, day) ;
+    return date;
+}

@@ -1,18 +1,51 @@
 import courseData from './config/courseData.json'
-import { getRandomCourse } from './utils/randomCourse.js';
-const N_COURSES = 100;
-function createCourses(){
+import College from './services/college';
+import Courses from './services/courses';
+import FormHandler from './ui/form_handler';
+import TableHandler from './ui/table_handler';
+import { getRandomCourse } from './utils/randomCourse';
+import _ from 'lodash';
+const N_COURSES = 5;
+function createCourses() {
     const courses = [];
-    for(let i = 0; i < N_COURSES; i++ ){
-        courses.push(getRandomCourse(courseData))
+    for (let i = 0; i < N_COURSES; i++) {
+        courses.push(getRandomCourse(courseData));
     }
     return courses;
 }
-console.log(courseData.maxCost)
-//TODO rendering inside UI, using map, json.stringify
-function goToHtml() {
-    const result = document.getElementById('courses')
-    const result2 = createCourses()
-    result.innerHTML = result2.map(p=> `<li>${JSON.stringify(p)}</li>`).join('')
-}  
-goToHtml()
+
+
+const courses = createCourses();
+
+const dataProvider = new Courses(courseData.minId, courseData.maxId, courses);
+const dataProcessor = new College(dataProvider, courseData);
+const tableHandler = new TableHandler([
+    {key: 'id', displayName: 'ID'},
+    {key: 'name', displayName: 'Course Name'},
+    {key: 'lecturer', displayName: 'Lecturer Name'},
+    {key: 'cost', displayName: "Cost (ILS)"},
+    {key: 'hours', displayName: "Course Duration (h)"}
+], "courses-table", "sortFnName");
+const formHandler = new FormHandler("courses-form", "alert");
+formHandler.addHandler(course => {
+    const res = dataProcessor.addCourse(course);
+    if (typeof (res) !== 'string') {
+        return '';
+    }
+    return res;
+
+})
+formHandler.fillOptions("course-name-options", courseData.courses);
+formHandler.fillOptions("lecturer-options", courseData.lectors);
+
+window.showForm = () => {
+    formHandler.show();
+    tableHandler.hideTable();
+}
+window.showCourses = () => {
+    tableHandler.showTable(dataProcessor.getAllCourses());
+    formHandler.hide();
+}
+window.sortCourses = (key)=> {
+    tableHandler.showTable(dataProcessor.sortCourses(key))
+}
