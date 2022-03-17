@@ -1,3 +1,5 @@
+import Courses from "./courses";
+
 export default class CoursesRest {
     #url
     constructor(url) {
@@ -15,7 +17,11 @@ export default class CoursesRest {
     }
     async get() {
         const response = await fetch(this.#url);
-        return await response.json();
+        const courses = await response.json();
+        return courses.map(c => {
+            c.openingDate = c.openingDate.substring(0, 10);
+            return c;
+        })
     }
     async remove(id) {
         const res = this.getCourse(id);
